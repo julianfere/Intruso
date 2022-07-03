@@ -1,0 +1,40 @@
+.modal {
+  background-color: #00000027;
+  position: fixed;
+  inset: 0;
+  display: none;
+ }
+
+ .modal-show {
+  display: block;
+ }
+
+.modal-content {
+  background-color: #ffffff;
+  width: 32rem;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 1.25rem;
+  position: relative;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+ }
+
+.modal-actions {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+  align-self: flex-end;
+}
+
+.modal-btn {
+  background-color: #fff;
+  border: 1px solid #000000;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
