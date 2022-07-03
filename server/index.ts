@@ -1,10 +1,12 @@
 import express from "express";
+import http from "http";
 import { Server } from "socket.io";
+import { EventPayload, EventTypes } from "./types";
 
 // Server setup
 
-const app = express();
-const httpServer = require("http").createServer(app);
+const httpServer = http.createServer(express());
+
 const io = new Server(httpServer, {
   cors: {
     origin: "*",
@@ -14,10 +16,12 @@ const io = new Server(httpServer, {
 // Event handlers
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-
-  socket.onAny((event, data: any) => {
+  socket.onAny((event: EventTypes, data: EventPayload) => {
     console.log(`Event: ${event}, payload: ${data}`);
+  });
+
+  socket.on("disconnect", (reason) => {
+    console.log("user disconnected", reason);
   });
 });
 
