@@ -1,9 +1,8 @@
 import { Store } from "../store";
-import { Player } from "../types";
-import { generateRandomRoomId } from "../utils";
+import { CreateRoomPayload, Player } from "../types";
 
-export function createRoom({ id, isAdmin, nick }: Player) {
-  const roomId = generateRandomRoomId();
+export function createRoom({ roomId, player }: CreateRoomPayload) {
+  const { id, isAdmin, nick } = player;
 
   return Store.getInstance().createRoom({
     id: roomId,
