@@ -21,14 +21,19 @@ io.on("connection", (socket) => {
     console.log(`Event: ${event}, payload: ${JSON.stringify(data)}`);
 
     // TODO: Create channel and emit response
-
-    switch (event) {
-      case EventTypes.CreateRoom:
-        createRoom(data.player);
-        break;
-      case EventTypes.GetRooms:
-        console.log(JSON.stringify(getRooms()));
-        break;
+    try {
+      switch (event) {
+        case EventTypes.CreateRoom:
+          const room = createRoom(data);
+          socket.join(room.id);
+          io.to(room.id).emit(EventTypes.RoomJoined, { room });
+          break;
+        case EventTypes.GetRooms:
+          console.log(JSON.stringify(getRooms()));
+          break;
+      }
+    } catch (e) {
+      console.log(e);
     }
   });
 
